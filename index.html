@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="웹디자이너, 웹퍼블리셔 포트폴리오">
+    <meta name="author" content="송현화">
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 스크롤애니메이션 -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
+    <!-- 스크롤 애니메이션 -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <title>portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
+        :root{
+            font-family:'IBM Plex Sans KR', sans-serif;
+            font-weight:400;
+            font-size:16px;
+            color:#222;
+        }
+        .container{
+            padding:0 20px;
+        }
+        .g-container{
+            display:grid;
+        }
+        .f-container{
+            display:flex;
+        }
+        html{
+            scroll-behavior:smooth;
+        }
+        #wrap{
+            max-width:2000px;
+            margin:0 auto;
+            overflow:hidden;
+        }      
+        #header{
+            margin:0 auto;
+            max-width:2000px;
+            position:fixed;
+            left:0;
+            right:0;
+            z-index:100;
+            background:transparent;
+            /* background:#50c3af; */
+            color:#fff;
+        }
+        #header .container{
+            position:relative;
+            top:-100px;
+            transition:0.3s;
+        }
+        nav ul{
+            height:50px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        #header .container.active{
+            top:0;
+            background:#50c3af;
+        }
+        h1{
+            display:none;
+        }
+        .sec{
+            padding:50px 0;
+        }
+        .sec h2{
+            padding-bottom:30px;
+            font-weight:700;
+            font-size:32px;
+            color:#000;
+        }
+        #intro{
+            height:270px;
+            position:relative;
+            background:url(./images/intro-img03.jpg) no-repeat;
+            background-position:center;
+            background-size:cover;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:-2;
+        }
+        #intro .typing-txt{
+            position:relative;
+            line-height:36px;
+            text-align:center;
+            color:#fff;
+            padding-bottom:0;
+            /* display:none; */
+        }
+        #intro .typing-txt::after{
+            content:'';
+            padding-left:5px;
+            border-right:2px solid #000;
+            animation:cursor 0.5s infinite;
+        }
+        #intro::after{
+            display:block;
+            content:'';
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            z-index:-1;
+            background:#000;
+            opacity:0.6;    
+        }
+        #project article{
+            padding-bottom:50px;
+        }
+        #project article:last-of-type{
+            padding:0;
+        }
+        #project h3{
+            font-size:25px;
+            padding-bottom:30px;
+        }
+        #project .img-box{
+            width:80%;
+            margin:0 auto 40px;
+        }
+        #project dl{
+            display:flex;
+            flex-flow:row wrap;
+            padding-bottom:24px;
+        }
+        #project .content dt{
+            width:25%;
+            font-weight:500;
+            color:#03594a;
+        }
+        #project .content dd{
+            width:75%;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        #project button{
+            width:142px;
+            height:40px;
+            border:1px solid #50c3af;
+            border-radius:14px;
+            background:#50c3af;
+            font-weight:600;
+            font-size:16px;
+            color:#fff;
+            cursor:pointer;
+        }
+        #project button:first-child{
+            margin-right:24px;
+        }
+        #project button:last-child{
+            width:155px;
+        }
+        #project button:hover{
+            background:transparent;
+            color:#50c3af;
+        }
+        #design{
+            position:relative;
+        }
+        #design::after{
+            display:block;
+            content:'';
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background:#50c3af;
+            opacity:0.4;
+            z-index:-10;
+        }
+        #design h2{
+            padding-left:20px;
+        }
+        #design .g-container li{
+            filter:grayscale(1);
+            transition:0.3s 0.3s;
+        }
+        #design .g-container li:hover{
+            filter:grayscale(0);
+        }
+        #design .pop-box{
+            position:fixed;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            z-index:1000;
+            display:none;
+        }
+        #design .pop-box.active{
+            display:flex;
+        }
+        #design .pop-box .container{
+            padding:20px;
+            width:600px;
+            height:500px;
+            border-radius:20px;
+            display:flex;
+            flex-flow:column nowrap;
+            background:#fff;
+        }
+        #design .pop-box .fas{
+            margin-bottom:25px;
+            font-size:28px;
+            text-align:right;
+            cursor:pointer;
+        }
+        #design .pop-box .content{
+            padding:0 30px;
+            text-align:center; 
+        }
+        #design .pop-box .img-box{
+            padding-bottom:20px;
+        }
+        #about-me h2{
+            font-size:40px;
+            text-align:center;
+        }
+        #about-me h2+p{
+            display:none;
+            text-align:center;
+            font-size:26px;
+            padding-bottom:40px;
+        }
+        #about-me .img-box{
+            margin:0 auto 30px;
+        }
+        #about-me img{
+            width:160px;
+            border-radius:50%;
+            overflow:hidden;
+        }
+        #about-me h3{
+            font-weight:700;
+            font-size:24px;
+        }
+        #about-me li{
+            padding-bottom:30px;
+        }
+        #about-me li:last-of-type{
+            padding-bottom:0;
+        }
+        #about-me .self-info{
+            display:flex;
+            flex-flow:column;
+        }
+        #about-me .self-info dl{
+            display:flex;
+            flex-flow:row wrap;
+            align-items:center;
+        }
+        #about-me .self-info dt{
+            width:30%;
+        }
+        #about-me .self-info dd{
+            width:70%;
+        }
+        #about-me .self-info li:last-child dd{
+            background:#dddddd;
+            border-radius:10px;
+            height:12px;
+        }
+        #about-me .self-info li:last-child span{
+            display:block;
+            text-indent:-9999px;
+            border-radius:10px;
+            width:80%;
+            height:12px;
+            background:#50c3af;
+            transition:0.3s;
+        }
+        #contact{
+            text-align:center;
+            position:relative;
+        }
+        #contact::after{
+            display:block;
+            content:'';
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background: #50c3af;
+            opacity:0.2;
+            z-index:-20;
+        }
+        #contact .f-container{
+            margin:0 auto;
+            padding:0 50px;
+            justify-content:space-between;
+            align-items:center;
+        }
+        #contact .email{
+            flex:1;
+            padding:30px;
+            border-radius:10px;
+            color:#fff;
+            text-align:center;
+            background:#1B423C;
+        }
+        #contact .sns{
+            flex:0.7;
+            display:none;
+        }
+        #contact .img-box{
+            margin:0 auto 20px;
+            width:176px;
+            height:176px;
+            background:#eeeeee;
+            position:relative;
+            transition:0.3s;
+        }
+        #contact .img-box:hover{
+            background:#fee500;
+        }
+        #contact img{
+            width:109px;
+            height:109px;
+            display:block;
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+        }
+        #footer{
+            height:80px;
+            padding:0 20px;
+            font-size:12px;
+            background:#666;
+            color:#fff;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        
+
+        @keyframes cursor{
+            0%{border-right: 1px solid #fff;}
+            50%{border-right: 1px solid #000;}
+            100%{border-right: 1px solid #fff;}
+        }
+
+        @media (min-width:768px){
+            nav ul{
+                height:85px;
+                font-size:30px;
+            }
+            .sec{
+                padding:85px 0;
+            }
+            #intro{
+                height:630px;
+            }
+            #intro .typing-txt{
+                font-size:50px;
+                line-height:60px;
+            }
+            #project .g-container{
+                grid-template-columns:repeat(8,1fr);
+                column-gap:24px;
+                align-items:center;
+            }
+            #project .img-box{
+                width:90%;
+                grid-column:1/5;
+                margin:0 auto;
+            }
+            #project .content{
+                grid-column:5/9;
+            }
+            #project article:nth-of-type(2) .img-box{
+                grid-column:5/9;
+                order:2;
+            }
+            #project article:nth-of-type(2) .content{
+                order:1;
+                grid-column:1/5;
+                padding-left:5%;
+            }
+            #design .g-container{
+                grid-template-columns:1fr 1fr;
+            }
+            #design h2{
+                padding-bottom:40px;
+            }
+            #about-me h2{
+                padding-bottom:40px;
+            }
+            #about-me h2+p{
+                display:block;
+            }
+            #about-me .g-container{
+                grid-template-columns:repeat(8,1fr);
+                column-gap:24px;
+            }
+            #about-me .img-box{
+                grid-column:1/5;
+            }
+            #about-me img{
+                width:100%;
+                border-radius:20px;
+                overflow:hidden;
+            }
+            #about-me .self-info{
+                grid-column:5/9;
+            }
+            #contact h2{
+                padding-bottom:40px;
+                font-size:40px;
+            }
+            #contact .email{
+                font-size:1.5em;
+            }
+            #contact .sns{
+                display:block;
+            }
+            #footer{
+                font-size:20px;
+            }
+        }
+        @media (min-width:1156px){
+            .container{
+                padding:0 22px;
+            }
+            nav ul{
+                height:100px;
+                justify-content:space-around;
+            }
+            .sec{
+                padding:100px 0;
+            }
+            .sec h2{
+                font-size:40px;
+            }
+            #intro{
+                height:900px;
+            }
+            #design h2{
+                font-size:40px;
+            }
+            #design .g-container{
+                grid-template-columns:1fr 1fr 1fr;
+            }
+            #about-me h2+p{
+                padding-bottom:50px;
+            }
+            #about-me .g-container{
+                grid-template-columns:repeat(12,1fr);
+            }
+            #about-me .self-info{
+                flex-flow:row wrap;
+                grid-column:5/13;
+            }
+            #about-me li{
+                width:50%;
+            }
+            #contact h2{
+                padding-bottom:40px;
+            }
+            #contact .email{
+                flex:0.6;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <section id="wrap">
+        <header id="header">
+            <div class="container">
+                <h1>웹퍼블리셔 송현화</h1>
+                <nav id="skip-menu">
+                    <ul>
+                        <li><a href="#project">Project</a></li>
+                        <li><a href="#design">Design</a></li>
+                        <li><a href="#about-me">About me</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div> 
+        </header>
+        <section id="main">
+            <section class="sec" id="intro">
+                <h2 class="typing-txt" data-type="NICE TO MEET YOU! I'm Webpublisher">
+                    NICE TO MEET YOU!<br>I'm Webpublisher
+                </h2>
+            </section>
+            <section class="sec" id="project">
+                <div class="container">
+                    <h2>Project</h2>
+                    <article data-aos="fade-right">
+                        <h3>1. Mozilla</h3>
+                        <div class="g-container">
+                            <div class="img-box">
+                                <img src="./images/ico-mozilla.png" alt="mozilla바로가기">
+                            </div>
+                            <div class="content">
+                                <dl>
+                                    <dt>기획의도</dt>
+                                    <dd>반응형 웹사이트를 제작하였습니다.</dd>
+                                    <dt>작업시간</dt>
+                                    <dd>3일</dd>
+                                    <dt>작업툴</dt>
+                                    <dd>VS code, Photoshop, illustrator</dd>
+                                    <dt>참여도</dt>
+                                    <dd>100%</dd>
+                                </dl>
+                                <div class="btn-go">
+                                    <a href="https://github.com/gusghk2581/mozilla" target="_blank"><button>작업과정보기</button></a>
+                                    <a href="https://gusghk2581.github.io/mozilla/" target="_blank"><button>사이트 바로가기</button></a>
+                                </div>
+                            </div>  
+                        </div>
+                    </article>
+                    <article data-aos="fade-left">
+                        <h3>2. INDIGO</h3>
+                        <div class="g-container">
+                            <div class="img-box">
+                            <img src="./images/ico-indigo.png" alt="indigo바로가기">
+                            </div>
+                            <div class="content">
+                                <dl>
+                                    <dt>기획의도</dt>
+                                    <dd>새로운 반응형 웹사이트를 만들었습니다.</dd>
+                                    <dt>작업시간</dt>
+                                    <dd>3일</dd>
+                                    <dt>작업툴</dt>
+                                    <dd>VS code, Photoshop, illustrator</dd>
+                                    <dt>참여도</dt>
+                                    <dd>100%</dd>
+                                </dl>
+                                <div class="btn-go">
+                                    <button>작업과정보기</button>
+                                    <button>사이트 바로가기</button>
+                                </div>
+                            </div> 
+                        </div>
+                    </article>
+                    <article data-aos="fade-right">
+                        <h3>3. Caffe BONITO</h3>
+                        <div class="g-container">
+                            <div class="img-box">
+                                <img src="./images/ico-bonito.png" alt="카페보니또">
+                            </div>
+                            <div class="content">
+                                <dl>
+                                    <dt>기획의도</dt>
+                                    <dd>기존 웹사이트의 문제점을 파악해 새롭게 리뉴얼했습니다.</dd>
+                                    <dt>작업시간</dt>
+                                    <dd>6일</dd>
+                                    <dt>작업툴</dt>
+                                    <dd>VS code, Photoshop, illustrator</dd>
+                                    <dt>참여도</dt>
+                                    <dd>100%</dd>
+                                </dl>
+                                <div class="btn-go">
+                                    <button>작업과정보기</button>
+                                    <button>사이트 바로가기</button>
+                                </div>
+                            </div>   
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="sec" id="design">
+                <h2>Design</h2>
+                <ul class="g-container">
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design01.jpg" alt="디자인01"></a>
+                    </li>
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design02.jpg" alt="디자인02"></a>
+                    </li>
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design03.jpg" alt="디자인03"></a>
+                    </li>
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design04.jpg" alt="디자인04"></a>
+                    </li>
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design05.jpg" alt="디자인05"></a>
+                    </li>
+                    <li data-aos="zoom-in">
+                        <a href="#"><img src="./images/design06.jpg" alt="디자인06"></a>
+                    </li>
+                </ul>
+                <div class="pop-box">
+                    <div class="container">
+                        <i class="fas fa-times"></i>
+                        <div class="content">
+                            <div class="img-box">
+                                <img src="./images/design01.jpg" alt="디자인01">
+                            </div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad, quod.</p> 
+                        </div>                       
+                    </div>
+                </div>
+            </section>
+            <section class="sec" id="about-me">
+                <div class="container">
+                    <h2>About me</h2>
+                    <p>성실함을 바탕으로 발전하는 웹퍼블리셔</p>
+                    <div class="g-container">
+                        <div class="img-box">
+                            <img src="./images/profile.jpg" alt="프로필사진">
+                        </div>
+                        <ul class="self-info">
+                            <li>
+                                <h3>PROFILE</h3>
+                                <dl>
+                                    <dt>이름</dt>
+                                    <dd>송현화</dd>
+                                    <dt>생년월일</dt>
+                                    <dd>1999.02.09</dd>
+                                    <dt>E-mail</dt>
+                                    <dd>gusghk2581@naver.com</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <h3>EDUCATION</h3>
+                                <dl>
+                                    <dt>2019.02</dt>
+                                    <dd>서정대학 애완동물과 졸업</dd>
+                                    <dt>2023.03~08</dt>
+                                    <dd>웹디자인&웹퍼블리셔 과정 수료</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <h3>CERTIFICATION</h3>
+                                <dl>
+                                    <dt>2022.04</dt>
+                                    <dd>운전면허 2종보통</dd>
+                                    <dt>2023.05</dt>
+                                    <dd>GTQ 2급</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <h3>SkILLS</h3>
+                                <dl>
+                                    <dt>Photoshop</dt>
+                                    <dd>
+                                        <span>80%</span>
+                                    </dd>
+                                    <dt>HMTL</dt>
+                                    <dd>
+                                        <span>75%</span>
+                                    </dd>
+                                    <dt>CSS</dt>
+                                    <dd>
+                                        <span>70%</span>
+                                    </dd>
+                                    <dt>javaScript</dt>
+                                    <dd>
+                                        <span>60%</span>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="sec" id="contact">
+                <div class="container">
+                    <h2>Contact</h2>
+                    <div class="f-container">
+                        <div class="email">
+                            <p>gusghk2581@naver.com</p>
+                        </div>
+                        <div class="sns">
+                            <div class="img-box">
+                                <img src="./images/contact-kakao.png" alt="오픈채팅방바로가기">  
+                            </div>
+                            <p>카카오톡 오픈채팅방<br>바로가기</p> 
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <footer id="footer">
+            <address>
+                Copyright 2023. SONG HYUN HWA All rights reserved.
+            </address>
+        </footer>
+    </section>
+    <script>
+        // 애니메이션스크롤 이벤트
+        AOS.init();
+        // 헤더스크롤이벤트
+        $(window).scroll(function(){
+            // console.log('스크롤중');
+            if($(this).scrollTop()>80){
+                $('#header .container').addClass('active');
+            }else{
+                $('#header .container').removeClass('active');
+            }
+        })
+        // 인트로 글자 타이핑이벤트
+        let allTxt = "NICE TO MEET YOU!\nI'm Webpublisher";
+        let idx=0;
+        let typingData=''; 
+        let typTxt = document.querySelector('.typing-txt');
+        setInterval(function(){
+            idx=0;                
+            typingData='';
+            function typingFunction(){
+                setTimeout(function(){
+                    if(idx<allTxt.length){
+                        typingData = typingData + allTxt[idx++];
+                        typTxt.innerText = typingData;
+                        typingFunction();
+                        }
+                },100)
+            };
+            typingFunction();
+        },allTxt.length*120)
+        // 팝업창오픈
+        let _openPop = $('#design .g-container li a');
+        console.log(_openPop);
+        $(_openPop).click(function(){
+            $('.pop-box').addClass('active');
+            return false;
+        })
+        // 팝업창닫기
+        $('.pop-box .fas').click(function(){
+            $('.pop-box').removeClass('active');
+        })
+
+        
+    </script>
+</body>
+</html>
