@@ -140,6 +140,17 @@
             transition:2s;
             box-shadow:5px 5px 10px rgba(0,0,0,0.3);
         }
+        #project article .img-box i{
+            display:block;
+            font-size:3em;
+            color:#50c3af;
+            position:absolute;
+            right:-15%;
+            bottom:-20%;
+            z-index:9000;
+            transform:rotate(-30deg);
+            animation: movecursor 0.5s ease-in-out 1s infinite alternate;
+        }
         #project article p{
             position:absolute;
             left:50%;
@@ -153,6 +164,9 @@
         }
         #project article .img-box:hover p{
             opacity:1;
+        }
+        #project article .img-box:hover #project article .img-box::after{
+            display:none;
         }
         #project article:nth-of-type(2) .img-box{
             background-image:url(./images/project02.jpg);
@@ -321,8 +335,8 @@
             border-radius:10px;
             width:80%;
             height:12px;
-            background:#50c3af;
-            transition:0.3s;
+            background-color:#50c3af;
+            transition: background-color 0.1s ease, color 0.3s linear;
         }
         #contact{
             text-align:center;
@@ -392,6 +406,10 @@
             0%{border-right: 1px solid #fff;}
             50%{border-right: 1px solid #000;}
             100%{border-right: 1px solid #fff;}
+        }
+        @keyframes movecursor{
+            o%{bottom:-15%;}
+            100%{bottom:-17%;}
         }
         @media (min-width:768px){
             nav ul{
@@ -549,12 +567,13 @@
                         <h3>1. Mozilla</h3>
                         <div class="g-container">
                             <div class="img-box">
+                                <i class="far fa-hand-point-up"></i>
                                 <p><a href="https://gusghk2581.github.io/mozilla/" target="_blank">사이트바로가기</a></p>
                             </div>
                             <div class="content">
                                 <dl>
                                     <dt>기획의도</dt>
-                                    <dd>반응형 웹사이트를 제작하였습니다.</dd>
+                                    <dd>반응형 웹사이트를 제작하였습니다.</dd> 
                                     <dt>작업기간</dt>
                                     <dd>3일</dd>
                                     <dt>작업프로그램</dt>
@@ -572,6 +591,7 @@
                         <h3>2. INDIGO</h3>
                         <div class="g-container">
                             <div class="img-box">
+                                <i class="far fa-hand-point-up"></i>
                                 <p><a href="https://gusghk2581.github.io/indigo/" target="_blank">사이트바로가기</a></p>
                             </div>
                             <div class="content">
@@ -595,6 +615,7 @@
                         <h3>3. Caffe BONITO</h3>
                         <div class="g-container">
                             <div class="img-box">
+                                <i class="far fa-hand-point-up"></i>
                                 <p><a href="https://gusghk2581.github.io/cafebonito/" target="_blank">사이트바로가기</a></p>
                             </div>
                             <div class="content">
