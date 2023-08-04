@@ -137,7 +137,7 @@
             background:url(./images/project01.jpg);
             background-position:0 0;
             background-size:cover;
-            transition:2s;
+            transition:3s;
             box-shadow:5px 5px 10px rgba(0,0,0,0.3);
         }
         #project article .img-box i{
@@ -336,7 +336,12 @@
             width:80%;
             height:12px;
             background-color:#50c3af;
-            transition: background-color 0.1s ease, color 0.3s linear;
+        }
+        #about-me .self-info li:last-child dd:nth-of-type(2) span{
+            width:75%;
+        }
+        #about-me .self-info li:last-child dd:last-of-type span{
+            width:60%;
         }
         #contact{
             text-align:center;
@@ -408,8 +413,8 @@
             100%{border-right: 1px solid #fff;}
         }
         @keyframes movecursor{
-            o%{bottom:-15%;}
-            100%{bottom:-17%;}
+            0%{bottom:-15%}
+            100%{bottom:-17%}
         }
         @media (min-width:768px){
             nav ul{
@@ -446,7 +451,7 @@
             }
             #project article:nth-of-type(2) .content{
                 order:1;
-                grid-column:1/5;
+                grid-column:2/5;
                 padding-left:5%;
             }
             #design .g-container{
@@ -535,7 +540,6 @@
             #contact .email{
                 flex:0.6;
             }
-
         }
     </style>
 </head>
@@ -780,7 +784,7 @@
                         typingData = typingData + allTxt[idx++];
                         typTxt.innerText = typingData;
                         typingFunction();
-                        }
+                    }
                 },100)
             };
             typingFunction();
@@ -788,9 +792,10 @@
         // 팝업창오픈
         let _openPop = $('#design .g-container li a');
         let _popBox = $('.pop-box');
-        console.log(_openPop);
         $(_openPop).click(function(){
             $('.pop-box').addClass('active');
+            // let popImg = `./images/design0'${n}'.jpg`;
+            // console.log(popImg);
             return false;
         })
         // 팝업창닫기
