@@ -8,540 +8,23 @@
     <meta name="author" content="송현화">
     <!-- CSS Reset -->
     <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/defalut.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- css animation -->
+    <link rel="stylesheet" href="./css/animation.css">
     <!-- 스크롤애니메이션 -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- jquery modal -->
+    <link rel="stylesheet" href="./css/jquery.modal.min.css">
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
     <!-- 스크롤 애니메이션 -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <title>portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
-        :root{
-            font-family:'IBM Plex Sans KR', sans-serif;
-            font-weight:400;
-            font-size:16px;
-            color:#222;
-        }
-        .container{
-            padding:0 20px;
-        }
-        .g-container{
-            display:grid;
-        }
-        .f-container{
-            display:flex;
-        }
-        html{
-            scroll-behavior:smooth;
-        }
-        #wrap{
-            max-width:2000px;
-            margin:0 auto;
-            overflow:hidden;
-        }      
-        #header{
-            margin:0 auto;
-            max-width:2000px;
-            position:fixed;
-            left:0;
-            right:0;
-            z-index:100;
-            background:transparent;
-            /* background:#50c3af; */
-            color:#fff;
-        }
-        #header .container{
-            position:relative;
-            top:-100px;
-            transition:0.3s;
-        }
-        nav ul{
-            height:50px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
-        #header .container.active{
-            top:0;
-            background:#50c3af;
-        }
-        h1{
-            display:none;
-        }
-        .sec{
-            padding:100px 0;
-        }
-        .sec h2{
-            padding-bottom:30px;
-            font-weight:700;
-            font-size:32px;
-            color:#000;
-        }
-        #intro{
-            height:270px;
-            position:relative;
-            background:url(./images/intro-img03.jpg) no-repeat;
-            background-position:center;
-            background-size:cover;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            z-index:-2;
-        }
-        #intro .typing-txt{
-            position:relative;
-            line-height:36px;
-            text-align:center;
-            color:#fff;
-            padding-bottom:0;
-            /* display:none; */
-        }
-        #intro .typing-txt::after{
-            content:'';
-            padding-left:5px;
-            border-right:2px solid #000;
-            animation:cursor 0.5s infinite;
-        }
-        #intro::after{
-            display:block;
-            content:'';
-            position:absolute;
-            left:0;
-            right:0;
-            top:0;
-            bottom:0;
-            z-index:-1;
-            background:#000;
-            opacity:0.6;    
-        }
-        #project article{
-            padding-bottom:120px;
-        }
-        #project article:last-of-type{
-            padding:0;
-        }
-        #project h3{
-            font-size:25px;
-            padding-bottom:30px;
-        }
-        #project article .img-box{
-            margin:0 auto 40px;
-            width:300px;
-            height:200px;
-            position:relative;
-            border:30px solid #f0f0f0;
-            border-radius:10px;
-            background:url(./images/project01.jpg);
-            background-position:0 0;
-            background-size:cover;
-            transition:3s;
-            box-shadow:5px 5px 10px rgba(0,0,0,0.3);
-        }
-        #project article .img-box i{
-            display:block;
-            font-size:3em;
-            color:#50c3af;
-            position:absolute;
-            right:-15%;
-            bottom:-20%;
-            z-index:9000;
-            transform:rotate(-30deg);
-            animation: movecursor 0.5s ease-in-out 1s infinite alternate;
-        }
-        #project article p{
-            position:absolute;
-            left:50%;
-            bottom:-18%;
-            transform:translate(-50%);
-            opacity:0;
-            transition:0.3s;
-        }
-        #project article .img-box:hover{
-            background-position:0 100%;
-        }
-        #project article .img-box:hover p{
-            opacity:1;
-        }
-        #project article .img-box:hover #project article .img-box::after{
-            display:none;
-        }
-        #project article:nth-of-type(2) .img-box{
-            background-image:url(./images/project02.jpg);
-        }
-        #project article:last-of-type .img-box{
-            background-image:url(./images/project03.png);
-        }
-        #project dl{
-            display:flex;
-            flex-flow:row wrap;
-            padding-bottom:40px;
-        }
-        #project .content dt{
-            width:25%;
-            padding-bottom:10px;
-            font-weight:500;
-            color:#03594a;
-        }
-        #project .content dt:last-of-type{
-            padding:0;
-        }
-        #project .content dd{
-            width:75%;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
-        }
-        #project button{
-            width:200px;
-            height:50px;
-            border:1px solid #50c3af;
-            border-radius:14px;
-            background:#50c3af;
-            font-weight:600;
-            font-size:16px;
-            color:#fff;
-            cursor:pointer;
-        }
-        #project button:hover{
-            background:transparent;
-            color:#50c3af;
-        }
-        #design{
-            position:relative;
-        }
-        #design::after{
-            display:block;
-            content:'';
-            position:absolute;
-            left:0;
-            right:0;
-            top:0;
-            bottom:0;
-            background:#50c3af;
-            opacity:0.4;
-            z-index:-10;
-        }
-        #design h2{
-            padding-left:20px;
-        }
-        #design .g-container li{
-            overflow: hidden;
-        }
-        #design .g-container li img{
-            filter: grayscale(1);
-            transform: scale(1);
-            transition: 0.3s;
-        }
-        #design .g-container li:hover img{
-            filter: grayscale(0);
-            transform: scale(1.05);
-        }
-        #design .pop-box{
-            position:fixed;
-            left:50%;
-            top:50%;
-            transform:translate(-50%,-50%);
-            z-index:1000;
-            display:none;
-        }
-        #design .pop-box.active{
-            display:flex;
-        }
-        #design .pop-box .container{
-            padding:20px;
-            width:600px;
-            height:auto;
-            border-radius:20px;
-            display:flex;
-            flex-flow:column nowrap;
-            background:#fff;
-        }
-        #design .pop-box .fas{
-            margin-bottom:25px;
-            font-size:28px;
-            text-align:right;
-            cursor:pointer;
-        }
-        #design .pop-box .content{
-            padding:0 30px;
-            text-align:center; 
-        }
-        #design .pop-box .img-box{
-            padding-bottom:20px;
-        }
-        #about-me h2{
-            font-size:40px;
-            text-align:center;
-        }
-        #about-me h2+p{
-            display:none;
-            text-align:center;
-            font-size:26px;
-            padding-bottom:40px;
-        }
-        #about-me .img-box{
-            margin:0 auto 60px;
-        }
-        #about-me img{
-            width:160px;
-            border-radius:50%;
-            overflow:hidden;
-        }
-        #about-me h3{
-            font-weight:700;
-            font-size:26px;
-            padding-bottom:10px;
-        }
-        #about-me li{
-            padding-bottom:40px;
-        }
-        #about-me li:last-of-type{
-            padding-bottom:0;
-        }
-        #about-me .self-info{
-            display:flex;
-            flex-flow:column;
-        }
-        #about-me .self-info dl{
-            display:flex;
-            flex-flow:row wrap;
-            align-items:center;
-        }
-        #about-me .self-info dt{
-            width:30%;
-            padding-bottom:10px;
-        }
-        #about-me .self-info dt:last-of-type{
-            padding-bottom:0;
-        }
-        #about-me .self-info dd{
-            width:70%;
-            padding-bottom:10px;
-        }
-        #about-me .self-info dd:last-of-type{
-            padding-bottom:0;
-        }
-        #about-me .self-info li:last-child dd{
-            background:#dddddd;
-            border-radius:10px;
-            height:12px;
-        }
-        #about-me .self-info li:last-child span{
-            display:block;
-            text-indent:-9999px;
-            border-radius:10px;
-            width:80%;
-            height:12px;
-            background-color:#50c3af;
-        }
-        #about-me .self-info li:last-child dd:nth-of-type(2) span{
-            width:75%;
-        }
-        #about-me .self-info li:last-child dd:last-of-type span{
-            width:60%;
-        }
-        #contact{
-            text-align:center;
-            position:relative;
-        }
-        #contact::after{
-            display:block;
-            content:'';
-            position:absolute;
-            left:0;
-            right:0;
-            top:0;
-            bottom:0;
-            background: #50c3af;
-            opacity:0.2;
-            z-index:-20;
-        }
-        #contact .f-container{
-            margin:0 auto;
-            padding:0 50px;
-            justify-content:space-between;
-            align-items:center;
-        }
-        #contact .email{
-            flex:1;
-            padding:30px;
-            border-radius:10px;
-            color:#fff;
-            text-align:center;
-            background:#1B423C;
-        }
-        #contact .sns{
-            flex:0.7;
-            display:none;
-        }
-        #contact .img-box{
-            margin:0 auto 20px;
-            width:176px;
-            height:176px;
-            background:#eeeeee;
-            position:relative;
-            transition:0.3s;
-        }
-        #contact .img-box:hover{
-            background:#fee500;
-        }
-        #contact img{
-            width:109px;
-            height:109px;
-            display:block;
-            position:absolute;
-            left:50%;
-            top:50%;
-            transform:translate(-50%,-50%);
-        }
-        #footer{
-            height:80px;
-            padding:0 20px;
-            font-size:12px;
-            background:#666;
-            color:#fff;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
-        @keyframes cursor{
-            0%{border-right: 1px solid #fff;}
-            50%{border-right: 1px solid #000;}
-            100%{border-right: 1px solid #fff;}
-        }
-        @keyframes movecursor{
-            0%{bottom:-15%}
-            100%{bottom:-17%}
-        }
-        @media (min-width:768px){
-            nav ul{
-                height:85px;
-                font-size:30px;
-            }
-            #intro{
-                height:630px;
-            }
-            #intro .typing-txt{
-                font-size:50px;
-                line-height:60px;
-            }
-            #project .g-container{
-                grid-template-columns:repeat(8,1fr);
-                column-gap:24px;
-                align-items:center;
-            }
-            #project article .img-box{
-                margin:0 auto;
-                grid-column:1/5;
-                width:400px;
-                height:300px;
-            }
-            #project article p{
-                bottom:-12%;
-            }
-            #project .content{
-                grid-column:5/9;
-            }
-            #project article:nth-of-type(2) .img-box{
-                grid-column:5/9;
-                order:2;
-            }
-            #project article:nth-of-type(2) .content{
-                order:1;
-                grid-column:2/5;
-                padding-left:5%;
-            }
-            #design .g-container{
-                grid-template-columns:1fr 1fr;
-            }
-            #design li img{
-                height:100%;
-            }
-            #design li:first-child{
-                grid-row:1/3;
-            }
-            #design h2{
-                padding-bottom:40px;
-            }
-            #about-me h2{
-                padding-bottom:40px;
-            }
-            #about-me h2+p{
-                display:block;
-            }
-            #about-me .g-container{
-                grid-template-columns:repeat(8,1fr);
-                column-gap:24px;
-            }
-            #about-me .img-box{
-                grid-column:1/5;
-            }
-            #about-me img{
-                width:100%;
-                border-radius:20px;
-                overflow:hidden;
-            }
-            #about-me .self-info{
-                grid-column:5/9;
-            }
-            #contact h2{
-                padding-bottom:40px;
-                font-size:40px;
-            }
-            #contact .email{
-                font-size:1.5em;
-            }
-            #contact .sns{
-                display:block;
-            }
-            #footer{
-                font-size:20px;
-            }
-        }
-        @media (min-width:1156px){
-            .container{
-                padding:0 22px;
-            }
-            nav ul{
-                height:100px;
-                justify-content:space-around;
-            }
-            .sec h2{
-                font-size:40px;
-            }
-            #intro{
-                height:900px;
-            }
-            #design h2{
-                font-size:40px;
-            }
-            #design .g-container{
-                grid-template-columns:1fr 1fr 1fr;
-            }
-            #about-me h2+p{
-                padding-bottom:50px;
-            }
-            #about-me .g-container{
-                grid-template-columns:repeat(12,1fr);
-            }
-            #about-me .self-info{
-                flex-flow:row wrap;
-                grid-column:5/13;
-            }
-            #about-me li{
-                width:50%;
-            }
-            #contact h2{
-                padding-bottom:40px;
-            }
-            #contact .email{
-                flex:0.6;
-            }
-        }
-    </style>
 </head>
 <body>
     <section id="wrap">
@@ -558,13 +41,12 @@
                 </nav>
             </div> 
         </header>
-        <section id="main">
-            <section class="sec" id="intro">
+        <section class="sec" id="intro">
                 <h2 class="typing-txt" data-type="NICE TO MEET YOU! I'm Webpublisher">
                     NICE TO MEET YOU!<br>I'm Webpublisher
                 </h2>
-            </section>
-            <section class="sec" id="project">
+        </section>
+        <section class="sec" id="project">
                 <div class="container">
                     <h2>Project</h2>
                     <article data-aos="fade-right">
@@ -586,7 +68,7 @@
                                     <dd>100%</dd>
                                 </dl>
                                 <div class="btn-go">
-                                    <a href="https://github.com/gusghk2581/mozilla" target="_blank"><button>작업과정보기</button></a>
+                                    <a href="https://github.com/gusghk2581/mozilla" target="_blank">작업과정보기</a>
                                 </div>
                             </div>  
                         </div>
@@ -610,7 +92,7 @@
                                     <dd>100%</dd>
                                 </dl>
                                 <div class="btn-go">
-                                    <a href="https://github.com/gusghk2581/indigo" target="_blank"><button>작업과정보기</button></a>
+                                    <a href="https://github.com/gusghk2581/indigo" target="_blank">작업과정보기</a>
                                 </div>
                             </div> 
                         </div>
@@ -634,45 +116,69 @@
                                     <dd>100%</dd>
                                 </dl>
                                 <div class="btn-go">
-                                    <a href="https://github.com/gusghk2581/cafebonito" target="_blank"><button>작업과정보기</button></a>
+                                    <a href="https://github.com/gusghk2581/cafebonito" target="_blank">작업과정보기</a>
                                 </div>
                             </div>   
                         </div>
                     </article>
                 </div>
-            </section>
-            <section class="sec" id="design">
+        </section>
+        <section class="sec" id="design">
                 <h2>Design</h2>
                 <ul class="g-container">
                     <li data-aos="zoom-in">
-                        <a href=".pop-box"><img src="./images/design01.jpg" alt="디자인01"></a>
+                        <a href="#modal01" rel="modal:open"><img src="./images/design01.jpg" alt="디자인01"></a>
+                        <div class="img-box" id="modal01">                          
+                            <picture>
+                                <source media="(min-width:1200px)" srcset="./images/design01.jpg">
+                                <source media="(min-width:768px)" srcset="./images/design01.jpg">
+                                <img src="./images/design01.jpg" alt="모바일">
+                            </picture>
+                        </div>
                     </li>
                     <li data-aos="zoom-in">
-                        <a href="#"><img src="./images/design02.jpg" alt="디자인02"></a>
+                        <a href="#modal02" rel="modal:open"><img src="./images/design02.jpg" alt="디자인02"></a>
+                        <div class="img-box" id="modal02">                          
+                            <picture>
+                                <source media="(min-width:1200px)" srcset="./images/design02.jpg">
+                                <source media="(min-width:768px)" srcset="./images/design02.jpg">
+                                <img src="./images/design02.jpg" alt="모바일">
+                            </picture>
+                        </div>
                     </li>
                     <li data-aos="zoom-in">
-                        <a href="#"><img src="./images/design03.jpg" alt="디자인03"></a>
+                        <a href="#modal03" rel="modal:open"><img src="./images/design03.jpg" alt="디자인03"></a>
+                        <div class="img-box" id="modal03">                          
+                            <picture>
+                                <source media="(min-width:1200px)" srcset="./images/design03.jpg">
+                                <source media="(min-width:768px)" srcset="./images/design03.jpg">
+                                <img src="./images/design03.jpg" alt="모바일">
+                            </picture>
+                        </div>
                     </li>
                     <li data-aos="zoom-in">
-                        <a href="#"><img src="./images/design04.jpg" alt="디자인04"></a>
+                        <a href="#modal04" rel="modal:open"><img src="./images/design04.jpg" alt="디자인04"></a>
+                        <div class="img-box" id="modal04">                          
+                            <picture>
+                                <source media="(min-width:1200px)" srcset="./images/design04.jpg">
+                                <source media="(min-width:768px)" srcset="./images/design04.jpg">
+                                <img src="./images/design04.jpg" alt="모바일">
+                            </picture>
+                        </div>
                     </li>
                     <li data-aos="zoom-in">
-                        <a href="#"><img src="./images/design05.jpg" alt="디자인05"></a>
+                        <a href="#modal05" rel="modal:open"><img src="./images/design05.jpg" alt="디자인05"></a>
+                        <div class="img-box" id="modal05">                          
+                            <picture>
+                                <source media="(min-width:1200px)" srcset="./images/design05.jpg">
+                                <source media="(min-width:768px)" srcset="./images/design05.jpg">
+                                <img src="./images/design05.jpg" alt="모바일">
+                            </picture>
+                        </div>
                     </li>
-                </ul>
-                <div class="pop-box">
-                    <div class="container">
-                        <i class="fas fa-times"></i>
-                        <div class="content">
-                            <div class="img-box">
-                                <img src="./images/design01.jpg" alt="디자인01">
-                            </div>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad, quod.</p> 
-                        </div>                       
-                    </div>
-                </div>
-            </section>
-            <section class="sec" id="about-me">
+                </ul>                
+        </section>
+        <section class="sec" id="about-me">
                 <div class="container">
                     <h2>About me</h2>
                     <p>성실함을 바탕으로 발전하는 웹퍼블리셔</p>
@@ -734,8 +240,8 @@
                         </ul>
                     </div>
                 </div>
-            </section>
-            <section class="sec" id="contact">
+        </section>
+        <section class="sec" id="contact">
                 <div class="container">
                     <h2>Contact</h2>
                     <div class="f-container">
@@ -750,58 +256,13 @@
                         </div>
                     </div>
                 </div>
-            </section>
-        </section>
+         </section>
         <footer id="footer">
             <address>
                 Copyright 2023. SONG HYUN HWA All rights reserved.
             </address>
         </footer>
     </section>
-    <script>
-        // 애니메이션스크롤 이벤트
-        AOS.init();
-        // 헤더스크롤이벤트
-        $(window).scroll(function(){
-            // console.log('스크롤중');
-            if($(this).scrollTop()>80){
-                $('#header .container').addClass('active');
-            }else{
-                $('#header .container').removeClass('active');
-            }
-        })
-        // 인트로 글자 타이핑이벤트
-        let allTxt = "NICE TO MEET YOU!\nI'm Webpublisher";
-        let idx=0;
-        let typingData=''; 
-        let typTxt = document.querySelector('.typing-txt');
-        setInterval(function(){
-            idx=0;                
-            typingData='';
-            function typingFunction(){
-                setTimeout(function(){
-                    if(idx<allTxt.length){
-                        typingData = typingData + allTxt[idx++];
-                        typTxt.innerText = typingData;
-                        typingFunction();
-                    }
-                },100)
-            };
-            typingFunction();
-        },allTxt.length*120)
-        // 팝업창오픈
-        let _openPop = $('#design .g-container li a');
-        let _popBox = $('.pop-box');
-        $(_openPop).click(function(){
-            $('.pop-box').addClass('active');
-            // let popImg = `./images/design0'${n}'.jpg`;
-            // console.log(popImg);
-            return false;
-        })
-        // 팝업창닫기
-        $('.pop-box .fas').click(function(){
-            $('.pop-box').removeClass('active');
-        })
-    </script>
+    <script src="./js/scripts.js"></script>
 </body>
 </html>
