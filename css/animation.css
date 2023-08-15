@@ -1,3 +1,0 @@
-@charset 'utf-8';
-@keyframes cursor{0%{border-right: 1px solid #fff;}50%{border-right: 1px solid #000;}100%{border-right: 1px solid #fff;}}
-@keyframes movecursor{0%{bottom:-15%}100%{bottom:-17%}}
