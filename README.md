@@ -6,7 +6,7 @@
 1. project
   + mozilla
   + indigo
-  + caffe BONITO    
+  + caffe BONITO   
 2.design
   + 제로웨이스트 실천하기 포스터
   + 겨울아우터 sale
