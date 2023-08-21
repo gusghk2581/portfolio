@@ -4,6 +4,6 @@
 
 ## 안녕하세요. 신입웹퍼블리셔 송현화입니다.
 + project
- + mozilla
- + indigo
- + caffe BONITO
+ ++ mozilla
+ ++ indigo
+ ++ caffe BONITO
